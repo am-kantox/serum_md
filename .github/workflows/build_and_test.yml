@@ -9,15 +9,15 @@ jobs:
 
     strategy:
       matrix:
-        otp-version: ['25', '26']
-        elixir-version: ['1.15']
+        otp-version: ['26']
+        elixir-version: ['1.16']
 
     env:
       MIX_ENV: test
 
     steps:
     - name: Setup OTP and Elixir
-      uses: erlef/setup-beam@v1
+      uses: erlef/setup-elixir@v1
       with:
         otp-version: ${{ matrix.otp-version }}
         elixir-version: ${{ matrix.elixir-version}}
@@ -44,4 +44,4 @@ jobs:
     - name: Run Tests and Generate Coverage Report
       run: mix coveralls.github
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.AUTH_TOKEN }}

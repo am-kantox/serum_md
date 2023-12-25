@@ -56,7 +56,7 @@ defmodule Serum.Markdown do
           {:arrows, [{:prev, String.t()} | {:next, String.t()}]}
           | (nil | String.t(), nil | String.t() -> String.t())
         ) :: String.t()
-  defp prev_next_links({:arrows, prev_next, proj}) do
+  def prev_next_links({:arrows, prev_next, proj}) do
     prev_next = for {k, v} <- prev_next, do: {k, safe_dest(v, proj.pretty_urls)}
     {opening, closing} = {"\n\n---\n⇒{{class:prev_next}}", "⇐\n"}
 
@@ -66,7 +66,7 @@ defmodule Serum.Markdown do
     Enum.join([opening, wrapper.(:prev), @splitter, wrapper.(:next), closing])
   end
 
-  defp prev_next_links(fun, prev_next) when is_function(fun, 2),
+  def prev_next_links(fun, prev_next) when is_function(fun, 2),
     do: fun.(prev_next[:prev], prev_next[:next])
 
   defp safe_dest(nil, _), do: nil

@@ -39,7 +39,7 @@ defmodule Serum.Post.PreviewGeneratorTest do
     end
 
     test "properly handles {:paragraphs, length} argument" do
-      preview = generate_preview(@html, {:paragraphs, 2})
+      _preview = generate_preview(@html, {:paragraphs, 2})
 
       [
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
