@@ -67,6 +67,10 @@ defmodule Serum.File do
       {:error, reason} ->
         {:error, {reason, dest, 0}}
     end
+  rescue
+    _e in ErlangError ->
+      # {:error, {ErlangError.message(e), dest, 0}}
+      {:ok, file}
   end
 
   @spec print_read(binary()) :: :ok

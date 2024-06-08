@@ -87,8 +87,13 @@ defmodule Serum.Fragment do
   defp extract_images(tree) do
     tree
     |> Floki.find("img")
-    |> Enum.map(fn {"img", attrs, _} ->
-      attrs |> Enum.find(fn {k, _} -> k === "src" end) |> elem(1)
+    |> Enum.flat_map(fn {"img", attrs, _} ->
+      attrs
+      |> Enum.find(fn {k, _} -> k === "src" end)
+      |> case do
+        {_, value} -> [value]
+        _ -> []
+      end
     end)
     |> List.flatten()
   end
